@@ -10,7 +10,7 @@ public class ImageContent extends Content{
     }
 
     @Override
-    void getDetails() {
+    public void getDetails() {
         StringBuilder sb = new StringBuilder();
 
         sb.append("[ IMAGE ]").append(" ");

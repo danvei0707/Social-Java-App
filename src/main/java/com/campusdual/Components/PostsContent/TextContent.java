@@ -8,10 +8,10 @@ public class TextContent extends Content{
     }
 
     @Override
-    void getDetails() {
+    public void getDetails() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("[ TEXT ]").append(" ");
+        sb.append("[ TEXT  ]").append(" ");
         sb.append(this.text);
 
         System.out.println(sb);

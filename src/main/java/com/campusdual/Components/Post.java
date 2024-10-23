@@ -10,4 +10,9 @@ public class Post {
     private Date publishDate;
     private Stack<Comment> comments;
     private Content content;
+
+    public Post(Date publishDate, Content content) {
+        this.publishDate = publishDate;
+        this.content = content;
+    }
 }

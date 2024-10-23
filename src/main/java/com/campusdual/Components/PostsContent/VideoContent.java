@@ -12,13 +12,13 @@ public class VideoContent extends Content{
     }
 
     @Override
-    void getDetails() {
+    public void getDetails() {
         StringBuilder sb = new StringBuilder();
 
         sb.append("[ VIDEO ]").append(" ");
         sb.append(this.title).append(" ");
         sb.append("(").append(this.quality).append("p, ");
-        sb.append(this.lengthSeconds).append("secs").append(")");
+        sb.append(this.lengthSeconds).append("s").append(")");
         // ¿? Función que procese y pase a horas los secs
 
         System.out.println(sb);
