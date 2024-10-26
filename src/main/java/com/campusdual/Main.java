@@ -1,7 +1,6 @@
 package com.campusdual;
 
 import com.campusdual.Components.Post;
-import com.campusdual.Components.PostsContent.Content;
 import com.campusdual.Components.PostsContent.ImageContent;
 import com.campusdual.Components.PostsContent.TextContent;
 import com.campusdual.Components.PostsContent.VideoContent;
@@ -10,14 +9,14 @@ import com.campusdual.Components.User;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 
 import static com.campusdual.UtilsDani.Utils.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Loading social Java app...");
+        System.out.println("Loading social Java app...\n");
+
         populateUsersList();
 
         testAll();
@@ -58,11 +57,11 @@ public class Main {
 
 
         // Console output
-        System.out.println("ADDED MOCK USERS: ");
+        System.out.print("ADDED MOCK USERS: ");
         for (String username: usersList.keySet()){
-            System.out.println(username);
+            System.out.print(username + ", ");
         }
-        System.out.println();
+        System.out.print("\n\n");
     }
 
     // TEST METHODS
@@ -83,6 +82,11 @@ public class Main {
             Method createPostMethod = Main.class.getMethod("createPost");
             testMethod(createPostMethod, n++, "Create and delete posts");
 
+            Method followUsersMethod = Main.class.getMethod("followUsers");
+            testMethod(followUsersMethod, n++, "Follow users with main account");
+
+            Method removeUserMethod = Main.class.getMethod("removeUser");
+            testMethod(removeUserMethod, n++, "Remove a user and its content from the app");
 
         } catch (Exception e){
             System.out.println(colorString(RED, "Some tests have failed: ") + e.getCause());
@@ -116,14 +120,14 @@ public class Main {
             System.out.println("User 'danvei' not found in usersList.");
         } else {
             // Create all post types and display them
-            System.out.println("1.1 | TRYING TO CREATE...");
+            System.out.println("A | TRYING TO CREATE...");
             me.createPost(new Post(new TextContent("Holaaa!! ")));
             me.createPost(new Post(new VideoContent("Fun weekend", 1720, 122)));
             me.createPost(new Post(new ImageContent("Photo with bro", "16/9")));
             me.listMyPosts(10);
 
             // Choose a post to delete and delete it
-            System.out.println("1.2 | TRYING TO DELETE...");
+            System.out.println("B | TRYING TO DELETE...");
             // Get the id from one of my posts
             String idToDelete1 = me.getMyPosts().get(0).getId();
             String idToDelete2 = me.getMyPosts().get(1).getId();
@@ -135,5 +139,46 @@ public class Main {
             me.deletePostById(idToDelete3);
             me.listMyPosts(10);
         }
+    }
+
+    public static void followUsers(){
+        User me = usersList.get("danvei");
+
+
+        System.out.println("A | TRYING TO FOLLOW...");
+        me.followUser(usersList, "mari_jim");
+        me.followUser(usersList, "pattyc_07");
+        me.followUser(usersList, "ed_cordoba");
+
+        System.out.println();
+
+        System.out.println(me.getUsername() + ": Your followed users list:");
+        for (String s : me.getFollowedUsersList()) {
+            System.out.println(s);
+        }
+
+        System.out.println();
+
+
+        System.out.println("B | TRYING TO UNFOLLOW...");
+        me.unfollowUser( usersList,"mari_jim");
+
+        System.out.println();
+
+        System.out.println(me.getUsername() + ": Your followed users list:");
+        for (String s : me.getFollowedUsersList()) {
+            System.out.println(s);
+        }
+    }
+
+    public static void removeUser(){
+        System.out.println("A | TRYING TO DELETE...");
+        User toDelete = usersList.get("pattyc_07");
+        toDelete.removeAccount(usersList);
+
+        System.out.println();
+
+        System.out.println("B | TRYING TO FIND DELETED USER...");
+        System.out.println(usersList.get(toDelete));
     }
 }

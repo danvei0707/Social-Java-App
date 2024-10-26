@@ -1,14 +1,14 @@
 package com.campusdual.Components;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import static com.campusdual.UtilsDani.Utils.YELLOW;
-import static com.campusdual.UtilsDani.Utils.colorString;
+import static com.campusdual.UtilsDani.Utils.*;
 
 public class User {
     // Nombre, lista de usuarios a los que sigue, lista de posts
     private String username;
-    private ArrayList<User> followedUsersList = new ArrayList<User>();
+    private ArrayList<String> followedUsersList = new ArrayList<String>();
     private ArrayList<Post> myPosts = new ArrayList<Post>(); // Changed to ArrayList
 
     public User(String name) {
@@ -42,13 +42,41 @@ public class User {
         }
     }
 
+    // Method to follow a user
+    public void followUser(HashMap<String,User> usersList, String username){
+        String toFollow = usersList.get(username).getUsername();
+        followedUsersList.add(toFollow);
+        System.out.println(this.username +  ": " + colorString(CYAN,"Followed " + toFollow));
+    }
+
+    // Method to unfollow a user
+    public void unfollowUser(HashMap<String,User> usersList, String username){
+        String toUnfollow = usersList.get(username).getUsername();
+        followedUsersList.remove(toUnfollow);
+        System.out.println(this.username + ": " + colorString(YELLOW, "Unfollowed " + toUnfollow));
+    }
+
+    // Method to delete the user
+    public void removeAccount(HashMap<String, User> usersList){
+        System.out.println(colorString(RED, "Deleting account: " + this.username));
+
+        // Delete all the related information
+        this.username = "deletedAccount";
+        this.followedUsersList = null;
+        this.myPosts = null;
+
+        // Remove this object from the app array
+        usersList.remove(this.username);
+        System.out.println("Account removed");
+    }
+
     // Getters
 
     public String getUsername() {
         return username;
     }
 
-    public ArrayList<User> getFollowedUsersList() {
+    public ArrayList<String> getFollowedUsersList() {
         return followedUsersList;
     }
 
@@ -58,13 +86,13 @@ public class User {
 
     public void listMyPosts(int limit) {
         if (myPosts.isEmpty()) {
-            System.out.println(this.username + ", aún no tienes posts en tu perfil.");
+            System.out.println("No posts published yet, " + this.username);
             return;
         }
 
         for (int i = 0; i < limit; i++) {
             if (i >= myPosts.size()) {
-                System.out.println("Es todo lo que tienes, " + this.username + "!");
+                System.out.println("It's all you've got, " + this.username + "!");
                 System.out.println();
                 return;
             } else {
