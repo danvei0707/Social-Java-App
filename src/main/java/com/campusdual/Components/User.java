@@ -2,14 +2,15 @@ package com.campusdual.Components;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.campusdual.UtilsDani.Utils.*;
 
 public class User {
     // Nombre, lista de usuarios a los que sigue, lista de posts
     private String username;
-    private ArrayList<String> followedUsersList = new ArrayList<String>();
-    private ArrayList<Post> myPosts = new ArrayList<Post>(); // Changed to ArrayList
+    private List<String> followedUsersList = new ArrayList<String>();
+    private List<Post> myPosts = new ArrayList<Post>(); // Changed to ArrayList
 
     public User(String name) {
         this.username = name;
@@ -19,6 +20,8 @@ public class User {
     public void createPost(Post post) {
         try {
             myPosts.add(post);
+            System.out.print("Published: ");
+            post.getPostDetails(false);
         } catch (Exception e) {
             System.out.println("User.class | createPost method error: ");
             throw e;
@@ -44,16 +47,26 @@ public class User {
 
     // Method to follow a user
     public void followUser(HashMap<String,User> usersList, String username){
-        String toFollow = usersList.get(username).getUsername();
-        followedUsersList.add(toFollow);
-        System.out.println(this.username +  ": " + colorString(CYAN,"Followed " + toFollow));
+        if (usersList.get(username) != null) {
+            followedUsersList.add(username);
+            System.out.println(this.username +  ": " + colorString(CYAN,"Followed " + username));
+        }
+        else {
+            System.out.println("The user you're trying to follow doesn't exist");
+        }
+
     }
 
     // Method to unfollow a user
     public void unfollowUser(HashMap<String,User> usersList, String username){
-        String toUnfollow = usersList.get(username).getUsername();
-        followedUsersList.remove(toUnfollow);
-        System.out.println(this.username + ": " + colorString(YELLOW, "Unfollowed " + toUnfollow));
+        if (usersList.get(username) != null || followedUsersList.contains(username)) {
+            followedUsersList.remove(username);
+            System.out.println(this.username + ": " + colorString(YELLOW, "Unfollowed " + username));
+        }
+        else {
+            System.out.println("You are not following the user " + username +  " already");
+        }
+
     }
 
     // Method to delete the user
@@ -76,11 +89,11 @@ public class User {
         return username;
     }
 
-    public ArrayList<String> getFollowedUsersList() {
+    public List<String> getFollowedUsersList() {
         return followedUsersList;
     }
 
-    public ArrayList<Post> getMyPosts() {
+    public List<Post> getMyPosts() {
         return myPosts;
     }
 
@@ -96,8 +109,12 @@ public class User {
                 System.out.println();
                 return;
             } else {
-                myPosts.get(i).getContentDetails();
+                myPosts.get(i).getPostDetails(false);
             }
         }
+    }
+
+    public void showSpecificPost(int i){
+        myPosts.get(i).getPostDetails(true);
     }
 }

@@ -17,6 +17,6 @@ public class ImageContent extends Content{
         sb.append(this.title).append(" ");
         sb.append("(").append(this.resolution).append(")");
 
-        System.out.println(sb);
+        System.out.print(sb);
     }
 }

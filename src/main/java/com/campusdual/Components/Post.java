@@ -1,9 +1,6 @@
 package com.campusdual.Components;
 
 import com.campusdual.Components.PostsContent.Content;
-import com.campusdual.Components.PostsContent.ImageContent;
-import com.campusdual.Components.PostsContent.TextContent;
-import com.campusdual.Components.PostsContent.VideoContent;
 
 
 import java.util.*;
@@ -13,16 +10,17 @@ import static com.campusdual.UtilsDani.Utils.colorString;
 
 public class Post {
     // Fecha, lista de comentarios, contenido
-    private String id;
-    private Date publishDate;
-    private Stack<Comment> comments; // ARRAY LIST??
-    private Content content;
+    private final String id;
+    private final Date publishDate;
+    private final List<Comment> comments;
+    private final Content content;
 
     public Post(Content content) {
         try {
             this.id = UUID.randomUUID().toString().substring(0,6);
             this.publishDate = new Date();
             this.content = content;
+            this.comments = new ArrayList<Comment>();
         } catch (Exception e){
             System.out.println("Posts constructor error: ");
             throw e;
@@ -30,7 +28,14 @@ public class Post {
 
     }
 
+    public void addComment(Comment c){
+        comments.add(c);
+        System.out.println(c.getAuthor().getUsername() + " commented: " + c.getContent());
+    }
 
+    public void deleteComment(int i){ // Needs the index of the comment
+        comments.remove(i);
+    }
 
     // Getters
     public Date getPublishDate() {
@@ -41,10 +46,24 @@ public class Post {
         return id;
     }
 
-    public void getContentDetails(){
+    public void getPostDetails(boolean expandComments){
         System.out.print(colorString(GRAY, this.id + " "));
         this.content.getDetails();
+
+        if (!this.comments.isEmpty()){
+            if (expandComments){
+                for (int i = 0; i < comments.size(); i++){
+                    System.out.print("\n" + colorString(GRAY, comments.get(i).getCommentDetails()));
+                }
+            }
+            else {
+                System.out.println(colorString(GRAY, " | " + this.comments.size() + " comments"));
+            }
+        }
+        else {
+            System.out.println(" | " + colorString(GRAY, "No comments"));
+        }
+
+
     }
-
-
 }

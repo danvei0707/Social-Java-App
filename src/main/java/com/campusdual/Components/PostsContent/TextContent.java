@@ -14,6 +14,6 @@ public class TextContent extends Content{
         sb.append("[ TEXT  ]").append(" ");
         sb.append(this.text);
 
-        System.out.println(sb);
+        System.out.print(sb);
     }
 }

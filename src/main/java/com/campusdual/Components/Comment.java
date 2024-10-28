@@ -1,5 +1,6 @@
 package com.campusdual.Components;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Comment {
@@ -25,5 +26,16 @@ public class Comment {
 
     public User getAuthor() {
         return author;
+    }
+
+    public String getCommentDetails(){
+        StringBuilder sb = new StringBuilder();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy  hh:mm");
+
+        sb.append(sdf.format(this.publishDate)).append(" - ")
+                .append(this.author.getUsername()).append(": ")
+                .append(this.content);
+
+        return sb.toString();
     }
 }

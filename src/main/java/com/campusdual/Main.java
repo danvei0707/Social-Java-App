@@ -1,5 +1,6 @@
 package com.campusdual;
 
+import com.campusdual.Components.Comment;
 import com.campusdual.Components.Post;
 import com.campusdual.Components.PostsContent.ImageContent;
 import com.campusdual.Components.PostsContent.TextContent;
@@ -7,9 +8,7 @@ import com.campusdual.Components.PostsContent.VideoContent;
 import com.campusdual.Components.User;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 import static com.campusdual.UtilsDani.Utils.*;
 
@@ -17,7 +16,9 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Loading social Java app...\n");
 
-        populateUsersList();
+//        populateUsersList();
+//        createRandomPosts(usersList);
+//        createRandomComments(usersList);
 
         testAll();
     }
@@ -40,29 +41,12 @@ public class Main {
 
     static HashMap<String, User> usersList = new HashMap<String, User>();
 
-    public static void populateUsersList(){
-        // Array with test names
-        ArrayList<String> mockUsers = new ArrayList<String>(Arrays.asList(
-                "carla_g18","davidlopez_99","ana_heart_23","sofia_mart","luis_4ever","nat_perez",
-                "javi_bae","laura_xoxo","ricardo.89","isabelita_17","fer_alv_12","cris_dreamer",
-                "mari_jim","alejandro_2024","pattyc_07","ed_cordoba","vero_bella","gabo_life",
-                "naty_cool","miguez.99"
-        ));
-
-        // Addition to User List
-        for (String username: mockUsers) {
-            User mockUser = new User(username);
-            usersList.put(username, mockUser);
-        }
+    // Usernames for the test users
+    static final String MY_NAME = "danvei";
+    static final String USER_1 = "joaquin_67";
+    static final String USER_2 = "loli02";
 
 
-        // Console output
-        System.out.print("ADDED MOCK USERS: ");
-        for (String username: usersList.keySet()){
-            System.out.print(username + ", ");
-        }
-        System.out.print("\n\n");
-    }
 
     // TEST METHODS
     public static void testAll(){
@@ -73,20 +57,19 @@ public class Main {
         try {
             int n = 1;
 
-            Method createUserMethod = Main.class.getMethod("CreateUserSelf");
-            testMethod(createUserMethod, n++, "Create user (self)");
-
-//            Method createContentMethod = Main.class.getMethod("CreatePostContents");
-//            testMethod(createContentMethod, n++, "Try all types of post content");
-
-            Method createPostMethod = Main.class.getMethod("createPost");
-            testMethod(createPostMethod, n++, "Create and delete posts");
+            Method createObjectsMethod = Main.class.getMethod("createObjects");
+            testMethod(createObjectsMethod, n++, "Create users, posts and comments");
 
             Method followUsersMethod = Main.class.getMethod("followUsers");
-            testMethod(followUsersMethod, n++, "Follow users with main account");
+            testMethod(followUsersMethod, n++, "Follow and unfollow other user accounts");
+
+            Method listUsersContentMethod = Main.class.getMethod("listUsersContent");
+            testMethod(listUsersContentMethod, n++, "List comments from posts");
 
             Method removeUserMethod = Main.class.getMethod("removeUser");
             testMethod(removeUserMethod, n++, "Remove a user and its content from the app");
+
+
 
         } catch (Exception e){
             System.out.println(colorString(RED, "Some tests have failed: ") + e.getCause());
@@ -96,89 +79,105 @@ public class Main {
 
     // ALL METHODS
 
-    public static void CreateUserSelf(){
-        User me = new User("danvei");
+    public static void createObjects(){
+        User me = new User(MY_NAME);
         usersList.put(me.getUsername(), me);
 
-        System.out.println("Welcome back, " + me.getUsername() + "!");
-    }
+        // Create all post types and display them
+        System.out.println("A | TRYING TO CREATE...");
+        me.createPost(new Post(new TextContent("Helloooo!! Welcome to my profile")));
+        me.createPost(new Post(new VideoContent("Fun weekend", 1720, 122)));
+        me.createPost(new Post(new ImageContent("Photo with bro", "16/9")));
+        System.out.println();
 
-    public static void CreatePostContents(){
+        System.out.println("B | ADDING COMMENTS...");
+        User u1 = new User(USER_1);
+        usersList.put(USER_1, u1);
+        User u2 = new User(USER_2);
+        usersList.put(USER_2, u2);
 
-        VideoContent vc = new VideoContent("Pool Party", 720, 113);
-        ImageContent ic = new ImageContent("Sunset View", "3/4");
-        TextContent tc = new TextContent("What does this button do?");
+        List<Post> myPosts = me.getMyPosts();
+        myPosts.get(0).addComment(new Comment("Hello friend!!!", new Date(), u1));
+        myPosts.get(0).addComment(new Comment("How are you!!", new Date(), u1));
 
-        vc.getDetails();
-        ic.getDetails();
-        tc.getDetails();
-    }
+        myPosts.get(1).addComment(new Comment("This is fun for you...?", new Date(), u2));
+        myPosts.get(1).addComment(new Comment("Always doing the best plans!!", new Date(), u1));
+        myPosts.get(1).addComment(new Comment("What's wong with the picture " + u2.getUsername() + "?", new Date(), me));
 
-    public static void createPost(){
-        User me = usersList.get("danvei");
-        if (me == null) {
-            System.out.println("User 'danvei' not found in usersList.");
-        } else {
-            // Create all post types and display them
-            System.out.println("A | TRYING TO CREATE...");
-            me.createPost(new Post(new TextContent("Holaaa!! ")));
-            me.createPost(new Post(new VideoContent("Fun weekend", 1720, 122)));
-            me.createPost(new Post(new ImageContent("Photo with bro", "16/9")));
-            me.listMyPosts(10);
+        myPosts.get(2).addComment(new Comment("Sorry for the bad quality", new Date(), me));
 
-            // Choose a post to delete and delete it
-            System.out.println("B | TRYING TO DELETE...");
-            // Get the id from one of my posts
-            String idToDelete1 = me.getMyPosts().get(0).getId();
-            String idToDelete2 = me.getMyPosts().get(1).getId();
-            String idToDelete3 = me.getMyPosts().get(2).getId();
+        System.out.println();
 
 
-            me.deletePostById(idToDelete1);
-            me.deletePostById(idToDelete2);
-            me.deletePostById(idToDelete3);
-            me.listMyPosts(10);
-        }
+        System.out.println("C | LISTING MY POSTS WITH COMMENT COUNTER...");
+        me.listMyPosts(5);
+
+
+        System.out.println("D | LISTING ONE OF MY POSTS WITH COMMENTS...");
+        me.getMyPosts().get(1).getPostDetails(true);
+        System.out.println("\n");
+
+
+//        System.out.println("E | TRYING TO DELETE THE POSTS...");
+//        // Get the id from one of my posts
+//        String idToDelete1 = me.getMyPosts().get(0).getId();
+//        String idToDelete2 = me.getMyPosts().get(1).getId();
+//        String idToDelete3 = me.getMyPosts().get(2).getId();
+//
+//        me.deletePostById(idToDelete1);
+//        me.deletePostById(idToDelete2);
+//        me.deletePostById(idToDelete3);
+//
+//        System.out.println("\n");
     }
 
     public static void followUsers(){
         User me = usersList.get("danvei");
 
-
         System.out.println("A | TRYING TO FOLLOW...");
-        me.followUser(usersList, "mari_jim");
-        me.followUser(usersList, "pattyc_07");
-        me.followUser(usersList, "ed_cordoba");
+        me.followUser(usersList, USER_1);
+        me.followUser(usersList, USER_2);
 
         System.out.println();
 
-        System.out.println(me.getUsername() + ": Your followed users list:");
-        for (String s : me.getFollowedUsersList()) {
-            System.out.println(s);
+        List<String> followed = me.getFollowedUsersList();
+
+        System.out.println("Your followed users list, " + me.getUsername() + ":");
+        for (int i = 0; i < followed.size(); i++ ) {
+            System.out.println((i+1) + " - " + followed.get(i));
         }
-
         System.out.println();
-
 
         System.out.println("B | TRYING TO UNFOLLOW...");
-        me.unfollowUser( usersList,"mari_jim");
+        me.unfollowUser( usersList,"loli02");
 
         System.out.println();
 
-        System.out.println(me.getUsername() + ": Your followed users list:");
-        for (String s : me.getFollowedUsersList()) {
-            System.out.println(s);
+        System.out.println("Your followed users list, " + me.getUsername() + ":");
+        for (int i = 0; i < followed.size(); i++ ) {
+            System.out.println((i+1) + " - " + followed.get(i));
         }
+    }
+
+    public static void listUsersContent(){
+
+        System.out.println("A | SHOWING COMMENT COUNTER LIST...");
+        usersList.get(MY_NAME).listMyPosts(4);
+        System.out.println();
+
+        System.out.println("B | SHOWING POST DETAIL...");
+        usersList.get(MY_NAME).getMyPosts().get(1).getPostDetails(true);
+        System.out.println();
     }
 
     public static void removeUser(){
         System.out.println("A | TRYING TO DELETE...");
-        User toDelete = usersList.get("pattyc_07");
+        User toDelete = usersList.get(USER_2);
         toDelete.removeAccount(usersList);
 
         System.out.println();
 
         System.out.println("B | TRYING TO FIND DELETED USER...");
-        System.out.println(usersList.get(toDelete));
+        System.out.println(usersList.get(USER_2).getUsername()); // Test if it still exists
     }
 }

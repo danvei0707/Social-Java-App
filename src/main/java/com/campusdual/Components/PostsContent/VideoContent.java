@@ -21,6 +21,6 @@ public class VideoContent extends Content{
         sb.append(this.lengthSeconds).append("s").append(")");
         // ¿? Función que procese y pase a horas los secs
 
-        System.out.println(sb);
+        System.out.print(sb);
     }
 }
