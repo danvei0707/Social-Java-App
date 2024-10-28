@@ -66,7 +66,7 @@ public class Main {
             Method listUsersContentMethod = Main.class.getMethod("listUsersContent");
             testMethod(listUsersContentMethod, n++, "List comments from posts");
 
-            Method removeUserMethod = Main.class.getMethod("removeUser");
+            Method removeUserMethod = Main.class.getMethod("removeObjects");
             testMethod(removeUserMethod, n++, "Remove a user and its content from the app");
 
 
@@ -116,19 +116,6 @@ public class Main {
         System.out.println("D | LISTING ONE OF MY POSTS WITH COMMENTS...");
         me.getMyPosts().get(1).getPostDetails(true);
         System.out.println("\n");
-
-
-//        System.out.println("E | TRYING TO DELETE THE POSTS...");
-//        // Get the id from one of my posts
-//        String idToDelete1 = me.getMyPosts().get(0).getId();
-//        String idToDelete2 = me.getMyPosts().get(1).getId();
-//        String idToDelete3 = me.getMyPosts().get(2).getId();
-//
-//        me.deletePostById(idToDelete1);
-//        me.deletePostById(idToDelete2);
-//        me.deletePostById(idToDelete3);
-//
-//        System.out.println("\n");
     }
 
     public static void followUsers(){
@@ -170,14 +157,35 @@ public class Main {
         System.out.println();
     }
 
-    public static void removeUser(){
-        System.out.println("A | TRYING TO DELETE...");
+    public static void removeObjects(){
+        User me = usersList.get(MY_NAME);
+
+        System.out.println("A | DELETING USER...");
         User toDelete = usersList.get(USER_2);
         toDelete.removeAccount(usersList);
 
         System.out.println();
 
-        System.out.println("B | TRYING TO FIND DELETED USER...");
-        System.out.println(usersList.get(USER_2).getUsername()); // Test if it still exists
+        System.out.println(USER_2 + " exists: " + (usersList.get(USER_2))); // Test if it still exist
+        System.out.println();
+
+        System.out.println("B | DELETING COMMENTS...");
+        Comment toBeRemoved = me.getMyPosts().get(1).getComments().get(1);
+        me.getMyPosts().get(1).removeComment(toBeRemoved);
+
+        me.getMyPosts().get(1).getComments();
+        System.out.println("\n");
+
+        System.out.println("C | DELETING POSTS...");
+        // Get the id from one of my posts
+        String idToDelete1 = me.getMyPosts().get(0).getId();
+        String idToDelete2 = me.getMyPosts().get(1).getId();
+        String idToDelete3 = me.getMyPosts().get(2).getId();
+
+        me.deletePostById(idToDelete1);
+        me.deletePostById(idToDelete2);
+        me.deletePostById(idToDelete3);
+        System.out.println("\nChecking deletion: ");
+        me.listMyPosts(5);
     }
 }

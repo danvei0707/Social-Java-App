@@ -12,10 +12,10 @@ Se quiere desarrollar una red social que contenga usuarios, y los usuarios pueda
 - Añadir usuarios, posts y comentarios. 
 - Dejar de seguir un usuario ✅
 - Comenzar a seguir un usuario ✅
-- Eliminar un usuario, un post o un comentario
+- Eliminar un usuario, un post o un comentario ✅
 - Listar todos los posts de un usuario ✅
-- Listar los comentarios de un usuario
-- Mostrar el número de comentarios que tiene un post
+- Listar los comentarios de un usuario ¿?
+- Mostrar el número de comentarios que tiene un post ✅
 
 
 ## BONUS:

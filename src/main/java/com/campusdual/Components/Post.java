@@ -28,9 +28,19 @@ public class Post {
 
     }
 
+    public List<Comment> getComments(){
+        return this.comments;
+    }
+
     public void addComment(Comment c){
         comments.add(c);
         System.out.println(c.getAuthor().getUsername() + " commented: " + c.getContent());
+    }
+
+    public void removeComment(Comment c){
+        // Implement validation: its comment owner? its post owner?
+        comments.remove(c);
+        System.out.print("Deleted the comment: " + colorString(GRAY, c.getCommentDetails()));
     }
 
     public void deleteComment(int i){ // Needs the index of the comment

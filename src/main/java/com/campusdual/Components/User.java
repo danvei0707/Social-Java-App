@@ -73,10 +73,11 @@ public class User {
     public void removeAccount(HashMap<String, User> usersList){
         System.out.println(colorString(RED, "Deleting account: " + this.username));
 
-        // Delete all the related information
-        this.username = "deletedAccount";
-        this.followedUsersList = null;
-        this.myPosts = null;
+
+//        // Delete all the related information
+//        this.username = "deletedAccount";
+//        this.followedUsersList = null;
+//        this.myPosts = null;
 
         // Remove this object from the app array
         usersList.remove(this.username);
