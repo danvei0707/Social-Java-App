@@ -1,4 +1,4 @@
-package com.campusdual.Menu;
+package com.campusdual.UsersMenu;
 
 import com.campusdual.Components.User;
 

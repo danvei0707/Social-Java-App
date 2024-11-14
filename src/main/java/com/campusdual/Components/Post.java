@@ -43,8 +43,21 @@ public class Post {
         System.out.print("Deleted the comment: " + colorString(GRAY, c.getCommentDetails()));
     }
 
-    public void deleteComment(int i){ // Needs the index of the comment
-        comments.remove(i);
+    public void deleteComment(String content){
+        int indexToDelete = 999;
+        for (int i = 0; i < comments.size(); i++) {
+            if (Objects.equals(comments.get(i).getContent(), content)){
+                indexToDelete = i;
+            }
+        }
+
+        if (indexToDelete != 999){
+            comments.remove(indexToDelete);
+            System.out.println("Comment removed");
+        }
+        else {
+            System.out.println("The comment was not found");
+        }
     }
 
     // Getters

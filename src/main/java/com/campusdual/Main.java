@@ -1,12 +1,11 @@
 package com.campusdual;
 
 import com.campusdual.Components.User;
-import com.campusdual.Menu.HomeMenu;
-import com.campusdual.Menu.LogMenu;
+import com.campusdual.UsersMenu.HomeMenu;
+import com.campusdual.UsersMenu.LogMenu;
+import com.campusdual.UtilsDani.MockData;
 
 import java.util.HashMap;
-
-import static com.campusdual.UtilsDani.TestRunner.testAll;
 
 public class Main {
     public static HashMap<String, User> usersList = new HashMap<String, User>();
@@ -17,8 +16,12 @@ public class Main {
 
         //testAll();
 
-        String currentUser = LogMenu.display();
-        HomeMenu.display(currentUser);
+        MockData.build();
+
+
+
+//        String currentUser = LogMenu.display();
+//        HomeMenu.display(currentUser);
 
     }
 

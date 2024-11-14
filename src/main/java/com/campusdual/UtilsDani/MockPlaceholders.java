@@ -1,0 +1,112 @@
+package com.campusdual.UtilsDani;
+
+public class MockPlaceholders {
+    public static final String[] usernames = {
+            "carlos_mndz23", "ana.rodrgz87", "maria.gnz13", "jorge_perez9", "luis_hdez54",
+            "sofia_lr14", "pedro.rz7", "carmen_schz42", "juan_lopez31", "elena.vlz22",
+            "diego_frz3", "laura.mtz18", "isabel_ortz5", "felipe.rmz61", "veronica_brr9",
+            "raul.gm20", "marta.snchz16", "pablo_vrs56", "lucia.ortz78", "daniel.mrtnz4"
+    };
+
+    public static final String[] texts = {
+            "Another day, another coffee. Still waiting for it to kick in.",
+            "Sunset views make everything better... even Mondays.",
+            "Guess what? I actually went to the gym today. Shocking, right?",
+            "Currently pretending my life is put together. Wish me luck!",
+            "Is it just me, or does adulting not come with an instruction manual?",
+            "Found a dog at the park. He’s cuter than all of us combined.",
+            "That awkward moment when Netflix asks, ‘Are you still watching?’",
+            "Woke up early to be productive. Now I'm just tired and unimpressed.",
+            "Hiking today! If I survive, maybe I'll go again. Maybe.",
+            "Life update: Still figuring things out.",
+            "Best part of today? Definitely the nap.",
+            "Went to a concert last night, and my ears are still ringing. Worth it.",
+            "Just learned that plants can die even if you talk to them. Sorry, fern.",
+            "Met someone cool today. Might delete this if it doesn’t go anywhere.",
+            "Nothing like coffee to remind you that life is not that bad.",
+            "Currently regretting every decision I made this weekend.",
+            "No plans tonight. Just me, snacks, and a mountain of movies.",
+            "Finally organized my room! Let’s see how long that lasts.",
+            "Pizza for dinner. Again. Zero regrets.",
+            "Just one of those days where I feel like staying under a blanket.",
+            "Some people run marathons; I just ran out of patience.",
+            "Waiting for the weekend like… ⏳",
+            "Taking things one day at a time. Today was... interesting.",
+            "Guess who overslept? Yep, me again.",
+            "Finally finished that book everyone’s been talking about. Not bad.",
+            "Monday blues or just life in general? Hard to say.",
+            "No Wi-Fi today. Felt like 1999 all over again.",
+            "So grateful for friends who bring pizza without asking.",
+            "When you realize you forgot your headphones. Tragic.",
+            "Bought new sneakers. Now I just need the motivation to run."
+    };
+
+    public static final String[] titles = {
+            "Late Night Snacks", "City Lights and Traffic Jams", "Morning Coffee Vibes",
+            "Rainy Day Thoughts", "Adventure Awaits... Or Does It?", "Gym Life (aka Torture)",
+            "Chilling with My Furry Friend", "Epic Fail Moments", "Monday Morning Blues",
+            "Lost in My Thoughts Again", "Concert Nights!", "Favorite Spot by the Lake",
+            "This View Deserves a Picture", "Self-Care, Sort of", "Messy Room, Messy Life",
+            "Unexpected Road Trip!", "Sunshine and Good Times", "Picnic in the Park",
+            "Movie Marathon Night", "Rain, Rain, Go Away", "Why Am I Still Awake?",
+            "Throwback to Simpler Times", "No Filter Needed", "New Hobby Attempt #87",
+            "Dreaming of the Weekend", "Feeling Like a Tourist in My Own City",
+            "Caught in the Moment", "Saturday Vibes", "Goodbye Productivity",
+            "Hello, Junk Food!", "Long Walks and Deep Thoughts", "Sundays Are for Rest",
+            "My Kind of Night", "Summer Days Are Here", "Work Hard, Nap Hard",
+            "When Life Gives You Lemons", "To-Do List? More Like To-Nap List",
+            "Living My Best Life (Sort of)", "Nature's Own Artwork", "Spontaneous Moments",
+            "Lost Track of Time", "Chasing Sunsets", "City Wanderer", "Tired but Happy"
+    };
+
+    public static final String[] randomComments = {
+            "Nice try. 😏",
+            "Wow, so original. 🙄",
+            "Just what I needed… not. 😂",
+            "Living the dream, huh? 😜",
+            "This post is too much. 😂",
+            "So motivational… if only. 😅",
+            "Look at you, flexing. 😆",
+            "Not jealous at all. 😜",
+            "Best post ever… not. 🤷‍♂️",
+            "You’re goals… kinda. 😏",
+            "Wow, life goals. ✨",
+            "This is too much positivity! 😆",
+            "You made my day. 😊",
+            "I’m crying from joy here! 😭",
+            "You’re shining bright! 🌟",
+            "I need your energy. 💪",
+            "Pure perfection. 🙌",
+            "I’m obsessed with this. 😍",
+            "This is everything. 🙏",
+            "I’m in awe of you. 😱",
+            "Superstar vibes. ⭐️",
+            "You’re unstoppable! 💥",
+            "This is a whole vibe. 😎",
+            "I’m living for this. 💖",
+            "You’re a legend. 🏆",
+            "This is next level. 😍",
+            "Keep shining, you’re amazing! 🌟",
+            "Love this so much! ❤️",
+            "Can’t stop smiling. 😊",
+            "You make life look easy! 😅",
+            "Such a mood! 😎",
+            "This is everything I needed. 🙏",
+            "I’m inspired. 💡",
+            "You’re killing it. 🔥",
+            "Can’t stop thinking about this. 😍",
+            "Pure positivity. ✨",
+            "Teach me your ways! 🙏",
+            "I need this in my life. 💖",
+            "You’re my motivation today! 💪",
+            "Goals right here. 😍",
+            "Living for this content. 🙌",
+            "This made my day! ☀️",
+            "Can’t get enough of this. 😍",
+            "You’re everything. 💖",
+            "Seriously inspiring. 💡",
+            "This is legendary. 👏"
+    };
+
+
+}

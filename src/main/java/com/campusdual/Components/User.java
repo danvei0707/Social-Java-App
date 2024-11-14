@@ -3,6 +3,7 @@ package com.campusdual.Components;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import static com.campusdual.UtilsDani.Utils.*;
 
@@ -10,7 +11,7 @@ public class User {
     // Nombre, lista de usuarios a los que sigue, lista de posts
     private String username;
     private List<String> followedUsersList = new ArrayList<String>();
-    private List<Post> myPosts = new ArrayList<Post>(); // Changed to ArrayList
+    private List<Post> myPosts = new ArrayList<Post>();
 
     public User(String name) {
         this.username = name;
@@ -94,23 +95,44 @@ public class User {
         return followedUsersList;
     }
 
+    public void showFollowedUsersList(){
+        if (followedUsersList.isEmpty()){
+            System.out.println("There are no followed users yet");
+        }
+        else {
+            for (String following: followedUsersList){
+                System.out.println("- User " + following);
+            }
+        }
+    }
+
     public List<Post> getMyPosts() {
         return myPosts;
     }
 
+    public Post getSpecificPost(String id) {
+        Post postById = null;
+        for (Post post: myPosts){
+            if (Objects.equals(post.getId(), id)){
+                postById = post;
+            }
+        }
+        return postById;
+    }
+
     public void listMyPosts(int limit) {
         if (myPosts.isEmpty()) {
-            System.out.println("No posts published yet, " + this.username);
+            System.out.println("The user " + this.username + " does not have posts published");
             return;
         }
 
         for (int i = 0; i < limit; i++) {
             if (i >= myPosts.size()) {
-                System.out.println("It's all you've got, " + this.username + "!");
                 System.out.println();
                 return;
             } else {
-                myPosts.get(i).getPostDetails(false);
+                myPosts.get(i).getPostDetails(true);
+                System.out.println();
             }
         }
     }

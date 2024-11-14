@@ -89,14 +89,14 @@ public class TestRunner {
         usersList.put(USER_2, u2);
 
         List<Post> myPosts = me.getMyPosts();
-        myPosts.get(0).addComment(new Comment("Hello friend!!!", new Date(), u1));
-        myPosts.get(0).addComment(new Comment("How are you!!", new Date(), u1));
+        myPosts.get(0).addComment(new Comment("Hello friend!!!", u1));
+        myPosts.get(0).addComment(new Comment("How are you!!", u1));
 
-        myPosts.get(1).addComment(new Comment("This is fun for you...?", new Date(), u2));
-        myPosts.get(1).addComment(new Comment("Always doing the best plans!!", new Date(), u1));
-        myPosts.get(1).addComment(new Comment("What's wong with the picture " + u2.getUsername() + "?", new Date(), me));
+        myPosts.get(1).addComment(new Comment("This is fun for you...?", u2));
+        myPosts.get(1).addComment(new Comment("Always doing the best plans!!", u1));
+        myPosts.get(1).addComment(new Comment("What's wong with the picture " + u2.getUsername() + "?", me));
 
-        myPosts.get(2).addComment(new Comment("Sorry for the bad quality", new Date(), me));
+        myPosts.get(2).addComment(new Comment("Sorry for the bad quality", me));
 
         System.out.println();
 

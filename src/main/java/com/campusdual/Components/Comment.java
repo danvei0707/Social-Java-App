@@ -9,9 +9,9 @@ public class Comment {
     private Date publishDate;
     private User author;
 
-    public Comment(String content, Date publishDate, User author) {
+    public Comment(String content, User author) {
         this.content = content;
-        this.publishDate = publishDate;
+        this.publishDate = new Date();
         this.author = author;
     }
 
