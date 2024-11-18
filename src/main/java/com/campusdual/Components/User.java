@@ -5,13 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import static com.campusdual.Main.usersList;
 import static com.campusdual.UtilsDani.Utils.*;
 
 public class User {
     // Nombre, lista de usuarios a los que sigue, lista de posts
-    private String username;
-    private List<String> followedUsersList = new ArrayList<String>();
-    private List<Post> myPosts = new ArrayList<Post>();
+    private final String username;
+    private final List<String> followedUsersList = new ArrayList<>();
+    private final List<Post> myPosts = new ArrayList<>();
 
     public User(String name) {
         this.username = name;
@@ -47,7 +48,7 @@ public class User {
     }
 
     // Method to follow a user
-    public void followUser(HashMap<String,User> usersList, String username){
+    public void followUser(String username){
         if (usersList.get(username) != null) {
             followedUsersList.add(username);
             System.out.println(this.username +  ": " + colorString(CYAN,"Followed " + username));
@@ -59,7 +60,7 @@ public class User {
     }
 
     // Method to unfollow a user
-    public void unfollowUser(HashMap<String,User> usersList, String username){
+    public void unfollowUser(String username){
         if (usersList.get(username) != null || followedUsersList.contains(username)) {
             followedUsersList.remove(username);
             System.out.println(this.username + ": " + colorString(YELLOW, "Unfollowed " + username));
@@ -135,9 +136,5 @@ public class User {
                 System.out.println();
             }
         }
-    }
-
-    public void showSpecificPost(int i){
-        myPosts.get(i).getPostDetails(true);
     }
 }

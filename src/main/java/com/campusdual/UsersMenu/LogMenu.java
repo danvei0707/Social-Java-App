@@ -1,33 +1,59 @@
 package com.campusdual.UsersMenu;
 
+import com.campusdual.AdminMenu.HomeMenu;
+import com.campusdual.UtilsDani.Menu;
 import com.campusdual.Components.User;
-
+import static com.campusdual.UtilsDani.Utils.*;
 import java.util.Scanner;
-
 import static com.campusdual.Main.usersList;
 
-public class LogMenu implements Menu{
-    public static String display() {
+public class LogMenu implements Menu {
+    public static void display() {
 
         Scanner input = new Scanner(System.in);
-        String username;
+        int selection;
 
-        while (true) {
-            System.out.print("Enter your username (6-30 characters): ");
-            username = input.nextLine();
+        System.out.println("\n-------------------------");
+        System.out.println("1. Log In");
+        System.out.println("2. Register");
+        System.out.println();
+        System.out.println("0. Prev Menu");
 
-            if (username.length() < 6 || username.length() > 30) {
-                System.out.println("The username must be 6 to 30 characters long");
-            } else if (usersList.get(username) != null) {
-                System.out.println("The username is already registered");
-            } else {
+        do {
+            System.out.print("\nChoose an action:  ");
+            selection = input.nextInt();
+        } while (selection < 0 || selection > 2);
+
+        switch (selection) {
+            case 0: // Prev
+                HomeMenu.display();
                 break;
-            }
+            case 1: // Log
+                logIn();
+                break;
+            case 2: // Register
+               register();
+               break;
         }
-        User me = new User(username);
-        usersList.put(username, me);
+    }
+    public static void logIn() {
+        if (!usersList.isEmpty()) {
+            String existingUsername = validateUsername("GET");
+            System.out.println("Welcome back " + existingUsername + "!");
+            UserMenu.display(existingUsername);
+        }
+        else {
+            System.out.println(colorString(YELLOW, "No users in the app"));
+            System.out.println("Switching to register screen...");
+            register();
+        }
+    }
 
-        System.out.println("Account created!");
-        return username;
+    public static void register(){
+        String newUsername = validateUsername("POST");
+        User me = new User(newUsername);
+        usersList.put(newUsername, me);
+        System.out.print("----  Account created || Welcome " + newUsername + "!  ");
+        UserMenu.display(newUsername);
     }
 }

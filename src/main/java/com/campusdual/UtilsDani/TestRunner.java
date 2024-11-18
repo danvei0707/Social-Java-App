@@ -118,8 +118,8 @@ public class TestRunner {
         }
 
         System.out.println("A | TRYING TO FOLLOW...");
-        me.followUser(usersList, USER_1);
-        me.followUser(usersList, USER_2);
+        me.followUser(USER_1);
+        me.followUser(USER_2);
 
         System.out.println();
 
@@ -132,7 +132,7 @@ public class TestRunner {
         System.out.println();
 
         System.out.println("B | TRYING TO UNFOLLOW...");
-        me.unfollowUser( usersList,"loli02");
+        me.unfollowUser( "loli02");
 
         System.out.println();
 

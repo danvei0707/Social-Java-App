@@ -1,22 +1,23 @@
 package com.campusdual.UsersMenu;
 
+import com.campusdual.AdminMenu.ManagementMenu;
+import com.campusdual.UtilsDani.Menu;
 import com.campusdual.Components.Post;
 import com.campusdual.Components.PostsContent.ImageContent;
 import com.campusdual.Components.PostsContent.TextContent;
 import com.campusdual.Components.PostsContent.VideoContent;
 import com.campusdual.Components.User;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 import static com.campusdual.UtilsDani.InputScanner.input;
+import static com.campusdual.UtilsDani.Utils.wantTo;
 
-public class NewPostMenu implements Menu{
-    public static void display(User myUsr){
-        System.out.println("-------------------------\n");
-        System.out.println("New post creation\n");
-
+public class NewPostMenu implements Menu {
+    public static void display(User myUsr, boolean isAdmin){
+        System.out.println("\n--- New post creation ----------------------");
         int selection;
+
         do {
             System.out.println("1.Video | 2.Image | 3.Text | 0.Cancel");
             System.out.print("Select post type:");
@@ -38,20 +39,20 @@ public class NewPostMenu implements Menu{
                 break;
             case 0:
                 // Go back
-                YourPostsMenu.display(myUsr);
+                if (!isAdmin) YourPostsMenu.display(myUsr);
+                else ManagementMenu.display();
                 break;
             default:
                 System.out.println("Invalid option");
-                HomeMenu.display(myUsr.getUsername());
+                UserMenu.display(myUsr.getUsername());
         }
 
-        System.out.println("Do you want to create another post? (y/n): ");
-        String restartCreation = input.next();
-        if (Objects.equals(restartCreation, "y")){
-            NewPostMenu.display(myUsr);
-        }
+        boolean repeat = wantTo("create another post");
+        if (repeat) NewPostMenu.display(myUsr,isAdmin);
         else {
-            YourPostsMenu.display(myUsr);
+            // Go back
+            if (!isAdmin) YourPostsMenu.display(myUsr);
+            else ManagementMenu.display();
         }
     }
 

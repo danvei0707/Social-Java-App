@@ -1,18 +1,18 @@
 package com.campusdual.UsersMenu;
 
+import com.campusdual.UtilsDani.Menu;
 import com.campusdual.Components.User;
 
 import java.util.Scanner;
 
 import static com.campusdual.UtilsDani.InputScanner.input;
 
-public class YourPostsMenu implements Menu{
+public class YourPostsMenu implements Menu {
     static int selection;
 
     public static void display(User myUsr){
-        System.out.println("-------------------------\n");
-        System.out.println(myUsr.getUsername() + "'s posts:");
-        myUsr.listMyPosts(5);
+        System.out.println("\n---" + myUsr.getUsername() + "'s posts: -------");
+        myUsr.listMyPosts(100);
         System.out.println();
         if (myUsr.getMyPosts().isEmpty()){
             do {
@@ -22,25 +22,25 @@ public class YourPostsMenu implements Menu{
 
             switch (selection) {
                 case 1:
-                    NewPostMenu.display(myUsr);
+                    NewPostMenu.display(myUsr, false);
                     break;
                 case 0:
-                    HomeMenu.display(myUsr.getUsername());
+                    UserMenu.display(myUsr.getUsername());
                     break;
                 default:
                     System.out.println("Invalid option");
-                    HomeMenu.display(myUsr.getUsername());
+                    UserMenu.display(myUsr.getUsername());
             }
         }
         else {
             do {
-                System.out.println("1.Create Post | 2.Delete Post | 3.Delete Comment | 0-Prev Menu");
+                System.out.println("1.Create Post | 2.Delete Post | 3.Delete Comment | 0.Prev Menu");
                 selection = input.nextInt();
             } while (selection < 0 | selection > 3);
 
             switch (selection) {
                 case 1:
-                    NewPostMenu.display(myUsr);
+                    NewPostMenu.display(myUsr, false);
                     break;
                 case 2:
                     Scanner sc1 = new Scanner(System.in);
@@ -62,11 +62,11 @@ public class YourPostsMenu implements Menu{
                     YourPostsMenu.display(myUsr); // Reset menu
                     break;
                 case 0:
-                    HomeMenu.display(myUsr.getUsername()); // Prev menu
+                    UserMenu.display(myUsr.getUsername()); // Prev menu
                     break;
                 default:
                     System.out.println("Invalid option");
-                    HomeMenu.display(myUsr.getUsername());
+                    UserMenu.display(myUsr.getUsername());
             }
         }
 
