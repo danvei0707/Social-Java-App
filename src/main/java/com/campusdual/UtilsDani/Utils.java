@@ -1,10 +1,13 @@
 package com.campusdual.UtilsDani;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 import static com.campusdual.Main.listUserList;
 import static com.campusdual.Main.usersList;
+import static com.campusdual.Utils.integer;
 import static com.campusdual.UtilsDani.InputScanner.input;
 
 public class Utils {
@@ -26,7 +29,45 @@ public class Utils {
         return Objects.equals(restartCreation, "y") || Objects.equals(restartCreation, "Y");
     }
 
-    public static String validateUsername(String action){
+
+    // Username Validators
+    public static boolean isValidUsername(String username) {
+        if (username.length() < 6 || username.length() > 30) {
+            System.out.println(colorString(YELLOW, "The username must be 6 to 30 characters long"));
+            return false;
+        }
+        else  return true; // All good
+    };
+
+    public static int getActionInt(int min, int max, String message){
+        int x;
+        do {
+            System.out.print(message);
+            x = integer();
+        } while (x < min || x > max);
+
+        return x;
+    };
+
+    public static boolean isValidUsername(String username, boolean noRepeat) {
+        if (username.length() < 6 || username.length() > 30) {
+            System.out.println(colorString(YELLOW, "The username must be 6 to 30 characters long"));
+            return false;
+        }
+        else {
+            if (noRepeat){ // Checks that the username is not in use
+                List<String> usernameList = new ArrayList<>(usersList.keySet());
+                if (usernameList.contains(username)) {
+                    System.out.println(colorString(YELLOW, "Username already in use"));
+                    return false;
+                }
+                else return true; // All good (noRepeat: true)
+            }
+            else return true; // All good  (noRepeat: false)
+        }
+    };
+
+    public static String validateUsernameOld(String action){
         Scanner newInput = new Scanner(System.in);
         String message = ("Username" + colorString(GRAY, "type 'c' to cancel || not yet UtilsDani:Utils:35") + ":");
 

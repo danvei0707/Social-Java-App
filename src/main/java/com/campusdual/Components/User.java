@@ -16,6 +16,7 @@ public class User {
 
     public User(String name) {
         this.username = name;
+        this.followedUsersList.add(name);
     }
 
     // Method to create a new post
@@ -102,7 +103,7 @@ public class User {
         }
         else {
             for (String following: followedUsersList){
-                System.out.println("- User " + following);
+               if (!following.equals(this.username)) System.out.println("- User " + following);
             }
         }
     }

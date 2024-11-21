@@ -9,27 +9,36 @@ import com.campusdual.UsersMenu.YourPostsMenu;
 import com.campusdual.UtilsDani.Menu;
 import com.campusdual.UtilsDani.MockData;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import static com.campusdual.Main.usersList;
+import static com.campusdual.Utils.*;
 import static com.campusdual.UtilsDani.InputScanner.input;
 
 public class HomeMenu implements Menu {
     public static boolean isMockCreated = false;
     public static void display() {
-        int selection;
+        List<String> actions = new ArrayList<>();
+        actions.add("Admin management");
+        actions.add("User actions");
+        actions.add("Create Mock data");
 
-        System.out.println("\n-------------------------");
-        System.out.println("1. Admin management (beta)");
-        System.out.println("2. User actions");
-        if (!isMockCreated) System.out.println("3. Create Mock data");
-        System.out.println();
-        System.out.println("0. Exit");
-        System.out.print("\nChoose an action:  ");
-        selection = input.nextInt();
+        showFromList(actions, false); // Just show elements
+
+        // Validation logics
+        int selection;
+        boolean valid = false;
+        do {
+            selection = integer("\nChoose an action (0 to exit):  ");
+            if (selection < 0 || selection > 3) System.out.println("Select a valid option");
+            else valid = true;
+        } while (!valid);
 
         switch (selection) {
             case 0:
-                // Exit app
-                System.out.println("Closing app... (in process)");
+                System.out.println("Exiting the app...");
                 break;
             case 1:
                 ManagementMenu.display();
@@ -46,6 +55,7 @@ public class HomeMenu implements Menu {
                 }
             default:
                 System.out.println("Invalid option");
+                display();
         }
     }
 }

@@ -4,17 +4,21 @@ import com.campusdual.Components.User;
 import com.campusdual.UsersMenu.NewPostMenu;
 import com.campusdual.UtilsDani.Menu;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 import static com.campusdual.Main.listUserList;
 import static com.campusdual.Main.usersList;
+import static com.campusdual.Utils.integer;
+import static com.campusdual.Utils.showAndSelectFromList;
 import static com.campusdual.UtilsDani.InputScanner.input;
 import static com.campusdual.UtilsDani.Utils.*;
 
 public class ManagementMenu implements Menu {
     public static void display() {
-        int selection;
+        List<String> userList = new ArrayList<>(usersList.keySet());
 
         System.out.println("\n-- MANAGEMENT ADMIN MENU -------------------------");
         System.out.println("1. Users");
@@ -23,10 +27,14 @@ public class ManagementMenu implements Menu {
         System.out.println();
         System.out.println("0. Prev Menu");
 
+        // Validation logics
+        int selection;
+        boolean valid = false;
         do {
-            System.out.print("\nChoose an action:  ");
-            selection = input.nextInt();
-        } while (selection < 0 || selection > 5);
+            selection = integer("\nChoose an action (0 to exit):  ");
+            if (selection < 0 || selection > 3) System.out.println("Select a valid option");
+            else valid = true;
+        } while (!valid);
 
         switch (selection) {
             case 0: // Prev
@@ -51,20 +59,26 @@ public class ManagementMenu implements Menu {
             display();
         }
         else {
+            List<String> usernameList = new ArrayList<>(usersList.keySet());
             String username1;
             String username2;
 
-            username1 = validateUsername("GET");
-            do {
-                username2 = validateUsername("GET");
-                if (Objects.equals(username2, username1)) System.out.println("One user can't follow itself, choose a valid one");
-            } while (Objects.equals(username2, username1));
+            List<String> selection1 = showAndSelectFromList(usernameList, true);
+            if (!selection1.isEmpty()){
+                username1 = selection1.get(0);
 
-            usersList.get(username1).followUser(username2);
+                List<String> selection2 = showAndSelectFromList(usernameList, true);
+                if (!selection2.isEmpty()){
+                    username2 = selection2.get(0);
+                    usersList.get(username1).followUser(username2);
+                }
+                else display(); // Exit
+            }
+            else display(); // Exit
 
             boolean repeat = wantTo("connect more users");
             if (repeat) forceFollow();
-            else display();
+            else display(); // Exit
         }
 
     }

@@ -4,12 +4,10 @@ import com.campusdual.UsersMenu.NewPostMenu;
 import com.campusdual.UtilsDani.Menu;
 
 import java.util.Objects;
-import java.util.Scanner;
 
-import static com.campusdual.Main.listUserList;
 import static com.campusdual.Main.usersList;
 import static com.campusdual.UtilsDani.InputScanner.input;
-import static com.campusdual.UtilsDani.Utils.validateUsername;
+import static com.campusdual.UtilsDani.Utils.validateUsernameOld;
 import static com.campusdual.UtilsDani.Utils.wantTo;
 
 public class PostsAdmin implements Menu {
@@ -41,7 +39,7 @@ public class PostsAdmin implements Menu {
     }
 
     public static void checkPosts() {
-        String username = validateUsername("GET");
+        String username = validateUsernameOld("GET");
         if (!Objects.equals(username, "")){
             usersList.get(username).listMyPosts(100);
 
@@ -58,7 +56,7 @@ public class PostsAdmin implements Menu {
     }
 
     private static void forcePost() {
-        String username = validateUsername("GET");
+        String username = validateUsernameOld("GET");
         NewPostMenu.display(usersList.get(username), true);
 
         boolean repeat = wantTo("choose another user to post");
