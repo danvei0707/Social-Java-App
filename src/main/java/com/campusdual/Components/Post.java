@@ -34,6 +34,7 @@ public class Post {
 
     public void addComment(Comment c){
         comments.add(c);
+
         System.out.println(c.getAuthor().getUsername() + " commented: " + c.getContent());
     }
 

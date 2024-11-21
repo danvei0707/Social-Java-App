@@ -11,7 +11,7 @@ import com.campusdual.Components.User;
 import java.util.List;
 import java.util.Random;
 
-import static com.campusdual.Main.usersList;
+import static com.campusdual.SocialJavaApp.usersList;
 import static com.campusdual.UtilsDani.MockPlaceholders.*;
 
 public class MockData {
@@ -47,12 +47,9 @@ public class MockData {
                 }
             }
         }
-            System.out.println();
-        System.out.println("*******************************************************");
-        System.out.println("*******************************************************");
-        System.out.println("******** Mock data generated successfully *************");
-        System.out.println("*******************************************************");
-        System.out.println("*******************************************************");
+        StringBuilder s = new StringBuilder();
+            s.append("\n".repeat(50));
+        System.out.println(s);
     }
 
     public static Content generateRandomContent() {

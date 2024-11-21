@@ -2,12 +2,11 @@ package com.campusdual.AdminMenu;
 
 import com.campusdual.Components.User;
 import com.campusdual.UtilsDani.Menu;
-import com.campusdual.UtilsDani.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.campusdual.Main.usersList;
+import static com.campusdual.SocialJavaApp.usersList;
 import static com.campusdual.Utils.showAndSelectFromList;
 import static com.campusdual.Utils.string;
 import static com.campusdual.UtilsDani.InputScanner.input;

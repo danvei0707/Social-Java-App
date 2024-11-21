@@ -1,13 +1,13 @@
 package com.campusdual.UsersMenu;
 
-import com.campusdual.AdminMenu.HomeMenu;
 import com.campusdual.UtilsDani.Menu;
 import com.campusdual.Components.User;
 
+import static com.campusdual.SocialJavaApp.setActiveUser;
 import static com.campusdual.Utils.string;
 import static com.campusdual.UtilsDani.Utils.*;
 import java.util.Scanner;
-import static com.campusdual.Main.usersList;
+import static com.campusdual.SocialJavaApp.usersList;
 
 public class LogMenu implements Menu {
     public static void display() {
@@ -18,14 +18,14 @@ public class LogMenu implements Menu {
         System.out.println("1. Log In");
         System.out.println("2. Register");
         System.out.println();
-        System.out.println("0. Prev Menu");
+        System.out.println("0. Exit");
 
-        String msg = "\nChoose an action (0 to exit): ";
+        String msg = "\nWelcome to social Java! Choose an action: ";
         int selection = getActionInt(0, 2, msg);
 
         switch (selection) {
             case 0: // Prev
-                HomeMenu.display();
+                System.out.println("Exiting the app...");
                 break;
             case 1: // Log
                 logIn();
@@ -35,8 +35,9 @@ public class LogMenu implements Menu {
                break;
         }
     }
+
     public static void logIn() {
-        if (usersList.isEmpty()) {
+        if (usersList.isEmpty()) { // If there are no users
             System.out.println(colorString(YELLOW, "No users in the app"));
             System.out.println("Switching to register screen...");
             register();
@@ -48,7 +49,7 @@ public class LogMenu implements Menu {
                 if (logName.equals("0")) break; // Exit
 
                 else if (isValidUsername(logName)){
-                    if (!usersList.keySet().contains(logName)){
+                    if (!usersList.containsKey(logName)){
                         System.out.println("The username doesn't exist"); // Loop
                     }
                     else break; // All good
@@ -58,7 +59,8 @@ public class LogMenu implements Menu {
             if (logName.equals("0")) display(); // Reset menu
             else {
                 System.out.println("Welcome back " + logName + "!");
-                UserMenu.display(logName); // Log in
+                setActiveUser(logName);
+                UserMenu.display(); // Log in
             }
         }
     }
@@ -74,8 +76,9 @@ public class LogMenu implements Menu {
         else {
         User me = new User(newUsername);
         usersList.put(newUsername, me);
-        System.out.print("(Account created) Welcome " + newUsername + "!  ");
-        UserMenu.display(newUsername);
+        System.out.print("(Account created) Welcome " + newUsername + "!  \n");
+        setActiveUser(newUsername);
+        UserMenu.display();
         }
     }
 }

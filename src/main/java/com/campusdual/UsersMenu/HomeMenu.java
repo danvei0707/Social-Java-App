@@ -1,21 +1,13 @@
-package com.campusdual.AdminMenu;
+package com.campusdual.UsersMenu;
 
-import com.campusdual.Components.User;
-import com.campusdual.Main;
-import com.campusdual.UsersMenu.FollowedMenu;
-import com.campusdual.UsersMenu.LogMenu;
-import com.campusdual.UsersMenu.NewPostMenu;
-import com.campusdual.UsersMenu.YourPostsMenu;
+import com.campusdual.AdminMenu.ManagementMenu;
 import com.campusdual.UtilsDani.Menu;
 import com.campusdual.UtilsDani.MockData;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import static com.campusdual.Main.usersList;
 import static com.campusdual.Utils.*;
-import static com.campusdual.UtilsDani.InputScanner.input;
 
 public class HomeMenu implements Menu {
     public static boolean isMockCreated = false;

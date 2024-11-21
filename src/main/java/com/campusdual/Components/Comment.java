@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class Comment {
     // Un texto, una fecha y un propietario (User)
-    private String content;
-    private Date publishDate;
-    private User author;
+    private final String content;
+    private final Date publishDate;
+    private final User author;
 
     public Comment(String content, User author) {
         this.content = content;

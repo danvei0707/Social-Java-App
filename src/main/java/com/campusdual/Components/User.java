@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-import static com.campusdual.Main.usersList;
+import static com.campusdual.SocialJavaApp.usersList;
 import static com.campusdual.UtilsDani.Utils.*;
 
 public class User {
@@ -13,6 +13,7 @@ public class User {
     private final String username;
     private final List<String> followedUsersList = new ArrayList<>();
     private final List<Post> myPosts = new ArrayList<>();
+    private final List<Comment> myComments = new ArrayList<>();
 
     public User(String name) {
         this.username = name;

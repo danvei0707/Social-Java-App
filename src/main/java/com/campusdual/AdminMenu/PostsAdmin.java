@@ -5,9 +5,8 @@ import com.campusdual.UtilsDani.Menu;
 
 import java.util.Objects;
 
-import static com.campusdual.Main.usersList;
+import static com.campusdual.SocialJavaApp.usersList;
 import static com.campusdual.UtilsDani.InputScanner.input;
-import static com.campusdual.UtilsDani.Utils.validateUsernameOld;
 import static com.campusdual.UtilsDani.Utils.wantTo;
 
 public class PostsAdmin implements Menu {
@@ -30,37 +29,41 @@ public class PostsAdmin implements Menu {
                 ManagementMenu.display();
                 break;
             case 1: // Post listing
-                checkPosts();
+                System.out.println("Not implemented");
+                display();
+//                checkPosts();
                 break;
             case 2: // Post creation
-                forcePost();
+                System.out.println("Not implemented");
+                display();
+//                forcePost();
                 break;
         }
     }
 
-    public static void checkPosts() {
-        String username = validateUsernameOld("GET");
-        if (!Objects.equals(username, "")){
-            usersList.get(username).listMyPosts(100);
-
-            boolean repeat = wantTo("see another user");
-            if (repeat) checkPosts();
-            else display();
-        }
-        else {
-            display();
-        }
-
-
-
-    }
-
-    private static void forcePost() {
-        String username = validateUsernameOld("GET");
-        NewPostMenu.display(usersList.get(username), true);
-
-        boolean repeat = wantTo("choose another user to post");
-        if (repeat) forcePost();
-        else display();
-    }
+//    public static void checkPosts() {
+//        String username = validateUsernameOld("GET");
+//        if (!Objects.equals(username, "")){
+//            usersList.get(username).listMyPosts(100);
+//
+//            boolean repeat = wantTo("see another user");
+//            if (repeat) checkPosts();
+//            else display();
+//        }
+//        else {
+//            display();
+//        }
+//
+//
+//
+//    }
+//
+//    private static void forcePost() {
+//        String username = validateUsernameOld("GET");
+//        NewPostMenu.display(usersList.get(username), true);
+//
+//        boolean repeat = wantTo("choose another user to post");
+//        if (repeat) forcePost();
+//        else display();
+//    }
 }

@@ -19,33 +19,35 @@ import com.campusdual.Components.User;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.campusdual.SocialJavaApp.getActiveUser;
 import static com.campusdual.Utils.showAndSelectFromList;
 import static com.campusdual.Utils.string;
 import static com.campusdual.UtilsDani.Utils.getActionInt;
 import static com.campusdual.UtilsDani.Utils.wantTo;
 
 public class YourPostsMenu implements Menu {
-    public static void display(User myUsr){
-        System.out.println("\n---" + myUsr.getUsername() + "'s posts: -------");
-        myUsr.listMyPosts(100);
+    public static void display(){
+        User user = getActiveUser();
+        System.out.println("\n---" + user.getUsername() + "'s posts: -------");
+        user.listMyPosts(100);
         System.out.println();
 
         // When the user has 0 posts
-        if (myUsr.getMyPosts().isEmpty()){
+        if (user.getMyPosts().isEmpty()){
             System.out.println("There are no posts yet\n\n");
             String msg = "1.Create Post | 0.Prev Menu";
             int selection = getActionInt(0,1, msg);
 
             switch (selection) {
                 case 1: // Create a post
-                    NewPostMenu.display(myUsr, false);
+                    NewPostMenu.display(user, false);
                     break;
                 case 0: // Go back
-                    UserMenu.display(myUsr.getUsername());
+                    UserMenu.display();
                     break;
                 default:
                     System.out.println("Invalid action");
-                    UserMenu.display(myUsr.getUsername());
+                    UserMenu.display();
             }
         }
 
@@ -56,20 +58,20 @@ public class YourPostsMenu implements Menu {
 
             switch (selection) {
                 case 1: // Open creation menu
-                    NewPostMenu.display(myUsr, false);
+                    NewPostMenu.display(user, false);
                     break;
                 case 2: // Delete and reset posts menu
-                    deletePost(myUsr);
+                    deletePost(user);
                     break;
                 case 3: // Select post, then comment, then delete and reset posts menu
-                    deleteComment(myUsr);
+                    deleteComment(user);
                     break;
                 case 0:
-                    UserMenu.display(myUsr.getUsername()); // Prev menu
+                    UserMenu.display(); // Prev menu
                     break;
                 default:
                     System.out.println("Invalid option");
-                    UserMenu.display(myUsr.getUsername());
+                    UserMenu.display();
             }
         }
     }
@@ -89,9 +91,9 @@ public class YourPostsMenu implements Menu {
             myUsr.deletePostById(post.getId());
             boolean repeat = wantTo("delete another post");
             if (repeat) deleteComment(myUsr);
-            else display(myUsr); // No repeat
+            else display(); // No repeat
         }
-        else display(myUsr); // Cancel
+        else display(); // Cancel
     }
 
     // Delete comments variants
@@ -116,10 +118,10 @@ public class YourPostsMenu implements Menu {
                 post.deleteComment(selectedList.get(0)); // Delete
                 boolean repeat = wantTo("delete another comment");
                 if (repeat) deleteComment(myUsr, post);
-                else display(myUsr); // No repeat
+                else display(); // No repeat
             }
         }
-        else display(myUsr); // Cancel
+        else display(); // Cancel
     }
 
     // Shortcut for repeat version
@@ -133,8 +135,8 @@ public class YourPostsMenu implements Menu {
                 post.deleteComment(selectedList.get(0)); // Delete
                 boolean repeat = wantTo("delete another comment");
                 if (repeat) deleteComment(myUsr, post);
-                else display(myUsr); // No repeat
+                else display(); // No repeat
             }
-            else display(myUsr); // Cancel
+            else display(); // Cancel
     }
 }

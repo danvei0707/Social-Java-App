@@ -8,11 +8,9 @@ import com.campusdual.Components.PostsContent.VideoContent;
 import com.campusdual.Components.User;
 
 import java.lang.reflect.Method;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
-import static com.campusdual.Main.usersList;
+import static com.campusdual.SocialJavaApp.usersList;
 import static com.campusdual.UtilsDani.Utils.*;
 
 public class TestRunner {

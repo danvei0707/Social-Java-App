@@ -1,19 +1,14 @@
 package com.campusdual.AdminMenu;
 
-import com.campusdual.Components.User;
-import com.campusdual.UsersMenu.NewPostMenu;
+import com.campusdual.UsersMenu.HomeMenu;
 import com.campusdual.UtilsDani.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
 
-import static com.campusdual.Main.listUserList;
-import static com.campusdual.Main.usersList;
+import static com.campusdual.SocialJavaApp.usersList;
 import static com.campusdual.Utils.integer;
 import static com.campusdual.Utils.showAndSelectFromList;
-import static com.campusdual.UtilsDani.InputScanner.input;
 import static com.campusdual.UtilsDani.Utils.*;
 
 public class ManagementMenu implements Menu {

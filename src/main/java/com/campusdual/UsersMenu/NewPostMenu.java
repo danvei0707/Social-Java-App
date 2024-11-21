@@ -44,19 +44,19 @@ public class NewPostMenu implements Menu {
                 break;
             case 0:
                 // Go back
-                if (!isAdmin) YourPostsMenu.display(myUsr);
+                if (!isAdmin) YourPostsMenu.display();
                 else ManagementMenu.display();
                 break;
             default:
                 System.out.println("Invalid option");
-                UserMenu.display(myUsr.getUsername());
+                UserMenu.display();
         }
 
         boolean repeat = wantTo("create another post");
         if (repeat) NewPostMenu.display(myUsr,isAdmin);
         else {
             // Go back
-            if (!isAdmin) YourPostsMenu.display(myUsr);
+            if (!isAdmin) YourPostsMenu.display();
             else ManagementMenu.display();
         }
     }

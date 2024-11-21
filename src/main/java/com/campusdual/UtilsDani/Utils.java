@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static com.campusdual.Main.listUserList;
-import static com.campusdual.Main.usersList;
+import static com.campusdual.SocialJavaApp.usersList;
 import static com.campusdual.Utils.integer;
 import static com.campusdual.UtilsDani.InputScanner.input;
 
@@ -66,56 +65,4 @@ public class Utils {
             else return true; // All good  (noRepeat: false)
         }
     };
-
-    public static String validateUsernameOld(String action){
-        Scanner newInput = new Scanner(System.in);
-        String message = ("Username" + colorString(GRAY, "type 'c' to cancel || not yet UtilsDani:Utils:35") + ":");
-
-        String username = "";
-        boolean valid = false;
-
-//        if (usersList.isEmpty()) {
-//            System.out.println(colorString(YELLOW, "No users in the app"));
-//            return "";
-//        }
-        // TODO: como gestionar cuando no hay usuarios en la lista
-
-        switch (action) {
-            case "GET":
-                // Lógica conseguir un username válido y existente
-                do {
-                    System.out.print("Existing users (" + usersList.size() + "): ");
-                    listUserList();
-
-                    System.out.print("Enter the username: ");
-                    username = newInput.nextLine();
-
-                    if (username.length() < 6 || username.length() > 30) {
-                        System.out.println(colorString(YELLOW, "The username must be 6 to 30 characters long"));
-                    } else if (usersList.get(username) == null) {
-                        System.out.println("The user '" + username + "' doesn't exist");
-                    } else {
-                        valid = true;
-                    }
-                } while (!valid);
-                break;
-            case "POST":
-                // Lógica conseguir un username único
-                do {
-                    System.out.print("Enter the username: ");
-                    username = newInput.nextLine();
-
-                    if (username.length() < 6 || username.length() > 30) {
-                        System.out.println(colorString(YELLOW, "The username must be 6 to 30 characters long"));
-                    } else if (usersList.get(username) != null) {
-                        System.out.println("The username already exists");
-                    }
-                    else {
-                        valid = true;
-                    }
-                } while (!valid);
-        }
-
-        return username;
-    }
 }

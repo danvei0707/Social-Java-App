@@ -16,16 +16,17 @@ import com.campusdual.Components.User;
 
 import java.util.*;
 
-import static com.campusdual.Main.usersList;
+import static com.campusdual.SocialJavaApp.getActiveUser;
+import static com.campusdual.SocialJavaApp.usersList;
 import static com.campusdual.Utils.showAndSelectFromList;
 import static com.campusdual.Utils.string;
-import static com.campusdual.UtilsDani.InputScanner.input;
 import static com.campusdual.UtilsDani.Utils.*;
 
 public class FollowedMenu implements Menu {
-    public static void display(User myUsr){
-        System.out.println("\n---" + myUsr.getUsername() + "'s following list:----------------------");
-        myUsr.showFollowedUsersList();
+    public static void display(){
+        User user = getActiveUser();
+        System.out.println("\n---" + user.getUsername() + "'s following list:----------------------");
+        user.showFollowedUsersList();
         System.out.println();
 
         String msg = "\n1.Follow user | 2.Unfollow User | 0-Prev Menu \nChoose an action: ";
@@ -35,54 +36,54 @@ public class FollowedMenu implements Menu {
             case 1:
                 if (usersList.isEmpty() || usersList.size() == 1) {
                     System.out.println("There are not enough users. Currently: " + usersList.size());
-                    display(myUsr);
+                    display();
                 }
-                else followLogics(myUsr);
+                else followLogics(user);
                 break;
             case 2:
                 if (usersList.isEmpty() || usersList.size() == 1) {
                     System.out.println("There are not enough users. Currently: " + usersList.size());
-                    display(myUsr);
+                    display();
                 }
-                unfollowLogics(myUsr);
+                unfollowLogics(user);
                 break;
             case 0:
-                UserMenu.display(myUsr.getUsername());
+                UserMenu.display();
                 break;
             default:
                 System.out.println("Invalid action");
-                UserMenu.display(myUsr.getUsername());
+                UserMenu.display();
                 break;
 
         }
     }
 
-    public static void followLogics(User myUsr) {
+    public static void followLogics(User user) {
         List<String> usernameList = new ArrayList<>(usersList.keySet());
-        List<String> selection = showAndSelectFromList(usernameList, true, false, myUsr.getFollowedUsersList());
+        List<String> selection = showAndSelectFromList(usernameList, true, false, user.getFollowedUsersList());
         if (!selection.isEmpty()){
             String toFollow = selection.get(0);
-            myUsr.followUser(toFollow); // Follow user
+            user.followUser(toFollow); // Follow user
             boolean repeat = wantTo("follow another user");
-            if (repeat) followLogics(myUsr);
-            else display(myUsr); // Exit
+            if (repeat) followLogics(user);
+            else display(); // Exit
         }
-        else display(myUsr); // Exit
+        else display(); // Exit
     }
 
-    public static void unfollowLogics(User myUsr) {
+    public static void unfollowLogics(User user) {
         List<String> excludedValues = new ArrayList<>();
-        excludedValues.add(myUsr.getUsername());
+        excludedValues.add(user.getUsername());
 
-        List<String> selection = showAndSelectFromList(myUsr.getFollowedUsersList(), true, false, excludedValues);
+        List<String> selection = showAndSelectFromList(user.getFollowedUsersList(), true, false, excludedValues);
         if (!selection.isEmpty()){
             String toUnfollow = selection.get(0);
-            myUsr.unfollowUser(toUnfollow); // Unfollow user
+            user.unfollowUser(toUnfollow); // Unfollow user
             boolean repeat = wantTo("unfollow another user");
-            if (repeat) unfollowLogics(myUsr);
-            else display(myUsr); // Exit
+            if (repeat) unfollowLogics(user);
+            else display(); // Exit
         }
-        else display(myUsr); // Exit
+        else display(); // Exit
     }
 }
 
