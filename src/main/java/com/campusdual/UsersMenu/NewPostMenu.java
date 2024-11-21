@@ -1,5 +1,15 @@
 package com.campusdual.UsersMenu;
 
+/*
+
+    (USUARIO/ADMIN) MENU DE CREACION DE POSTS
+    Contiene el proceso de creación de los tres tipos de post
+
+    EXTRAS:
+    - Posibilidad de crear rápidamente otro post
+
+ */
+
 import com.campusdual.AdminMenu.ManagementMenu;
 import com.campusdual.UtilsDani.Menu;
 import com.campusdual.Components.Post;
@@ -8,21 +18,16 @@ import com.campusdual.Components.PostsContent.TextContent;
 import com.campusdual.Components.PostsContent.VideoContent;
 import com.campusdual.Components.User;
 
-import java.util.Scanner;
-
-import static com.campusdual.UtilsDani.InputScanner.input;
+import static com.campusdual.Utils.integer;
+import static com.campusdual.Utils.string;
+import static com.campusdual.UtilsDani.Utils.getActionInt;
 import static com.campusdual.UtilsDani.Utils.wantTo;
 
 public class NewPostMenu implements Menu {
     public static void display(User myUsr, boolean isAdmin){
         System.out.println("\n--- New post creation ----------------------");
-        int selection;
-
-        do {
-            System.out.println("1.Video | 2.Image | 3.Text | 0.Cancel");
-            System.out.print("Select post type:");
-            selection = input.nextInt();
-        } while (selection > 3 || selection < 0);
+        String msg = "1.Video | 2.Image | 3.Text | 0.Cancel";
+        int selection = getActionInt(0,3,msg);
 
         switch (selection) {
             case 1:
@@ -57,26 +62,23 @@ public class NewPostMenu implements Menu {
     }
 
     static void newVideo(User myUsr){
-        String title;
+        String title = "";
         int resolution;
         int lengthSeconds;
 
-        Scanner videoInput = new Scanner(System.in);
-
         do{
-            System.out.print("Video title: ");
-            title = videoInput.nextLine();
+            title = string("Video title: ");
         }while (title.length() < 3);
 
         do{
-            System.out.print("Video resolution (just numbers, eg 720): ");
-            resolution = input.nextInt();
+            System.out.print("Video resolution (integer): ");
+            resolution = integer();
         }while (resolution < 122 || resolution > 10000);
 
         do {
             System.out.print("Video length (seconds): ");
-            lengthSeconds=input.nextInt();
-        }while (lengthSeconds < 0);
+            lengthSeconds= integer();
+        }while (lengthSeconds <= 0);
 
         System.out.print("Posting video... ");
         VideoContent vc = new VideoContent(title, resolution, lengthSeconds);
@@ -87,16 +89,12 @@ public class NewPostMenu implements Menu {
         String title;
         String aspectRatio;
 
-        Scanner imageInput = new Scanner(System.in);
-
         do{
-            System.out.print("Image title: ");
-            title = imageInput.nextLine();
+            title = string("Image title: ");
         }while (title.length() < 3);
 
         do{
-            System.out.print("Image aspect ratio (format 'xx/xx'): ");
-            aspectRatio = input.nextLine();
+            aspectRatio = string("Image aspect ratio (width/height): ");
         }while (aspectRatio.isEmpty());
 
         System.out.print("Posting image... ");
@@ -107,11 +105,8 @@ public class NewPostMenu implements Menu {
     static void newText(User myUsr){
         String title;
 
-        Scanner textInput = new Scanner(System.in);
-
-        do{
-            System.out.print("Text: ");
-            title = textInput.nextLine(); // ERROR
+        do{;
+            title = string("Content: "); // ERROR
         }while (title.length() < 3);
 
         System.out.print("Posting text... ");

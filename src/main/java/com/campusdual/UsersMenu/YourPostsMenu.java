@@ -10,6 +10,7 @@ package com.campusdual.UsersMenu;
     - Diferentes visualizaciones del menú según haya posts o no
  */
 
+
 import com.campusdual.Components.Comment;
 import com.campusdual.Components.Post;
 import com.campusdual.UtilsDani.Menu;
@@ -17,11 +18,9 @@ import com.campusdual.Components.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static com.campusdual.Utils.showAndSelectFromList;
 import static com.campusdual.Utils.string;
-import static com.campusdual.UtilsDani.InputScanner.input;
 import static com.campusdual.UtilsDani.Utils.getActionInt;
 import static com.campusdual.UtilsDani.Utils.wantTo;
 
